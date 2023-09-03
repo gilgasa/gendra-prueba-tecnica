@@ -33,7 +33,11 @@ jobs:
         # Auth Docker in this step as well, right before Maven does its job.
         gcloud auth configure-docker --quiet
         mvn clean package -Pcompilar-docker
-    
+
+    # Espera de 30 segundos antes del despliegue
+    - name: Wait for 30 seconds
+      run: sleep 30
+
     - name: Deploy to Cloud Run
       run: |
           gcloud run deploy gendra-prueba-tecnica-gil --image gcr.io/gendra-proyecto/${{ github.repository }}:1.0-SNAPSHOT --region us-central1 --platform managed --allow-unauthenticated
