@@ -80,31 +80,6 @@
 
     <build>
         <plugins>
-            <!-- Docker Spotify Maven Plugin -->
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.13</version>
-                <configuration>
-                    <repository>gcr.io/gendra-proyecto/${project.artifactId}</repository>
-                    <tag>${project.version}</tag>
-                    <dockerfile>${project.basedir}/Dockerfile</dockerfile>
-                    <buildArgs>
-                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>build-and-push</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- Usamos el properties-maven-plugin para leer la variable de ambiente -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -133,10 +108,32 @@
             <id>compilar-docker</id>
             <build>
                 <plugins>
-                    <!-- Configuración relacionada con Docker para este perfil -->
+                    <!-- Docker Spotify Maven Plugin -->
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <version>1.4.13</version>
+                        <configuration>
+                            <repository>gcr.io/gendra-proyecto/${project.artifactId}</repository>
+                            <tag>${project.version}</tag>
+                            <dockerfile>${project.basedir}/Dockerfile</dockerfile>
+                            <buildArgs>
+                                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                            </buildArgs>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>build-and-push</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                    <goal>push</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
     </profiles>
-
 </project>
