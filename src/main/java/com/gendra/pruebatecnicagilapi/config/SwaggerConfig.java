@@ -32,7 +32,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiDetails() {
         return new ApiInfoBuilder()
-                .title("Prueba Técnica  - : " + userRole)
+                .title("Prueba Técnica GENDRA- : " + userRole)
                 .description("Esta API es una prueba técnica con la principal funcionalidad de traer información sobre ciudades.")
                 .contact(new Contact("Gilberto García", "", "gilgasan1@gmail.com"))
                 .version(appVersion)
