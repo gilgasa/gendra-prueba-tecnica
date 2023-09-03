@@ -40,4 +40,4 @@ jobs:
 
     - name: Deploy to Cloud Run
       run: |
-          gcloud run deploy gendra-prueba-tecnica-gil --image gcr.io/gendra-proyecto/${{ github.repository }}:1.0-SNAPSHOT --region us-central1 --platform managed --allow-unauthenticated
+          gcloud run deploy gendra-prueba-tecnica-gil --image gcr.io/gendra-proyecto/gendra-prueba-tecnica-gil:1.0-SNAPSHOT --region us-central1 --platform managed --allow-unauthenticated
