@@ -17,9 +17,6 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: Build with Maven and compile for Docker
-      run: mvn clean package -Pcompilar-docker
-
     - name: Authenticate with GCR
       uses: google-github-actions/setup-gcloud@v0.2.1
       with:
@@ -31,7 +28,8 @@ jobs:
       run: |
         gcloud auth configure-docker --quiet
 
-    - name: Push Docker image to GCR
+    - name: Build with Maven, Authenticate Docker and Push Image
       run: |
-        docker push gcr.io/gendra-proyecto/${{ github.repository }}:1.0-SNAPSHOT
-      
+        # Auth Docker in this step as well, right before Maven does its job.
+        gcloud auth configure-docker --quiet
+        mvn clean package -Pcompilar-docker
